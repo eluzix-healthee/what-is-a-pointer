@@ -7,8 +7,8 @@ use std::ptr;
 use pointer_talk::perf_metrics::{get_page_faults, VirtualAddress};
 
 fn main() -> Result<(), Box<dyn Error>> {
-    // let page_size = 1024*16;
-    let page_size = 4096;
+    let page_size = 1024*16;
+    // let page_size = 4096;
     let page_count = 16384;
     // let page_count = 1000;
     let total_size = page_size * page_count;
@@ -30,9 +30,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         return Ok(());
     }
 
-    // let va = VirtualAddress::from_pointer(addr as usize);
-    // va.print();
-
     let mut prior_over_fault_count: i32 = 0;
     let mut prior_page_index: usize = 0;
 
@@ -42,11 +39,8 @@ fn main() -> Result<(), Box<dyn Error>> {
 
         for page_index in 0..page_count {
             let write_index = page_size * page_index;
-            // let write_index = total_size - 1 - page_size * page_index;
-            // println!("Writing to {}", write_index);
             byte_slice[write_index] = page_index as u8;
             let end_faults_count = get_page_faults(pid);
-            // println!("Writing to page {}", write_index);
 
             let over_fault_count = end_faults_count - start_faults_count;
             if over_fault_count > prior_over_fault_count {
