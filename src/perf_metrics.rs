@@ -106,7 +106,6 @@ pub fn high_resolution_clock() -> Duration {
     }
 }
 
-
 #[derive(Debug)]
 pub struct VirtualAddress {
     pointer: usize,
@@ -130,22 +129,17 @@ impl VirtualAddress {
     }
 
     pub fn print(&self) {
-        println!("{} | {} | {} | {} | {}",
-                 self.l1_index,
-                 self.l2_index,
-                 self.l3_index,
-                 self.l4_index,
-                 self.offset
+        println!(
+            "{} | {} | {} | {} | {}",
+            self.l1_index, self.l2_index, self.l3_index, self.l4_index, self.offset
         );
     }
 
     pub fn format(&self) -> String {
-        format!("{} | {} | {} | {} | {}",
-                 self.l1_index,
-                 self.l2_index,
-                 self.l3_index,
-                 self.l4_index,
-                 self.offset)
+        format!(
+            "{} | {} | {} | {} | {}",
+            self.l1_index, self.l2_index, self.l3_index, self.l4_index, self.offset
+        )
         // format!("{}", self.pointer)
     }
 }

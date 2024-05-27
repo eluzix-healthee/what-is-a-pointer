@@ -1,13 +1,13 @@
 extern crate libc;
 
+use libc::{mmap, munmap, size_t, MAP_ANON, MAP_FAILED, MAP_PRIVATE, PROT_READ, PROT_WRITE};
 use std::error::Error;
-use libc::{mmap, munmap, PROT_READ, PROT_WRITE, MAP_PRIVATE, MAP_ANON, MAP_FAILED, size_t};
 use std::ptr;
 
 use pointer_talk::perf_metrics::{get_page_faults, VirtualAddress};
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let page_size = 1024*16;
+    let page_size = 1024 * 16;
     // let page_size = 4096;
     let page_count = 16384;
     // let page_count = 1000;
@@ -44,10 +44,16 @@ fn main() -> Result<(), Box<dyn Error>> {
 
             let over_fault_count = end_faults_count - start_faults_count;
             if over_fault_count > prior_over_fault_count {
-                println!("Page {}: {} extra faults ({} page size since last PF)", page_index, over_fault_count, page_index - prior_page_index);
+                println!(
+                    "Page {}: {} extra faults ({} page size since last PF)",
+                    page_index,
+                    over_fault_count,
+                    page_index - prior_page_index
+                );
 
                 if page_index > 0 {
-                    let vaddr = VirtualAddress::from_pointer(addr as usize + page_size * prior_page_index);
+                    let vaddr =
+                        VirtualAddress::from_pointer(addr as usize + page_size * prior_page_index);
                     println!("    Previous Pointer: {}", vaddr.format());
                 }
 

@@ -1,7 +1,7 @@
+use libc::{mmap, munmap, MAP_ANON, MAP_FAILED, MAP_PRIVATE, PROT_READ, PROT_WRITE};
+use pointer_talk::perf_metrics::VirtualAddress;
 use std::error::Error;
 use std::ptr;
-use libc::{MAP_ANON, MAP_FAILED, MAP_PRIVATE, mmap, munmap, PROT_READ, PROT_WRITE};
-use pointer_talk::perf_metrics::VirtualAddress;
 
 fn allocate_and_print_pointer() {
     let total_size = 1024 * 1024 * 1024;
