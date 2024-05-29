@@ -1,6 +1,6 @@
 extern crate libc;
 
-use libc::{mmap, munmap, size_t, MAP_ANON, MAP_FAILED, MAP_PRIVATE, PROT_READ, PROT_WRITE};
+use libc::{mmap, munmap, MAP_ANON, MAP_FAILED, MAP_PRIVATE, PROT_READ, PROT_WRITE};
 use std::error::Error;
 use std::ptr;
 

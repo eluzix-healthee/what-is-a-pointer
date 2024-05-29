@@ -142,4 +142,8 @@ impl VirtualAddress {
         )
         // format!("{}", self.pointer)
     }
+
+    pub fn get_pointer(&self) -> usize {
+        self.pointer
+    }
 }
