@@ -1,5 +1,12 @@
 # what-is-a-pointer
 
+## Installation
+
+This will install the necessary dependencies to run the code and build the project in debug mode.
+```bash
+cargo build
+```
+
 ### To run the code:
 ```bash
 ./run.sh <example number>
